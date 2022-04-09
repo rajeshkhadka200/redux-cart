@@ -1,3 +1,4 @@
+import { Provider } from "react-redux";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 //imports for the components
@@ -6,17 +7,20 @@ import "./css/index.css";
 import Cart from "./pages/Cart";
 import Home from "./pages/Home";
 
-// import for the redux libs
+import store from "./store/store";
+
 function App() {
   return (
     <>
-      <BrowserRouter>
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />}></Route>
-          <Route path="/cart" element={<Cart />}></Route>
-        </Routes>
-      </BrowserRouter>
+      <Provider store={store}>
+        <BrowserRouter>
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<Home />}></Route>
+            <Route path="/cart" element={<Cart />}></Route>
+          </Routes>
+        </BrowserRouter>
+      </Provider>
     </>
   );
 }

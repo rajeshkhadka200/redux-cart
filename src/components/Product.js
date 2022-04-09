@@ -17,14 +17,37 @@ const Product = () => {
     fetchProduct();
   }, []);
 
+  const showWrapper = () => {
+    if (product.length) {
+      return (
+        <>
+          <div className="product_wrapper">
+            {product.slice(0, limit).map((data) => {
+              const { title, price, image, id, description } = data;
+              return (
+                <Card
+                  key={id}
+                  title={title}
+                  price={price}
+                  image={image}
+                  id={id}
+                  description={description}
+                />
+              );
+            })}
+          </div>
+        </>
+      );
+    }
+  };
   return (
     <>
-      <div className="product_wrapper">
-        {product.slice(0, limit).map((data) => {
-          const { title, price, image } = data;
-          return <Card title={title} price={price} image={image} />;
-        })}
-      </div>
+      {product.length < 1 && (
+        <div className="loading">
+          <h5>loading ...</h5>
+        </div>
+      )}
+      {showWrapper()}
       {limit < product.length && (
         <div className="load_more_div">
           <span onClick={() => setLimit(limit + 4)}>Load More</span>
