@@ -8,6 +8,7 @@ const productSlice = createSlice({
       //   console.log(state);
       const product = await fetch("https://fakestoreapi.com/products");
       const parsed = await product.json();
+      console.log(parsed);
     },
   },
 });
