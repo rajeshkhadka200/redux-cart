@@ -1,17 +1,26 @@
 import { createSlice } from "@reduxjs/toolkit";
-
 const productSlice = createSlice({
   name: "product slice",
-  data: [],
+  initialState: [],
   reducers: {
-    async get_product() {
-      //   console.log(state);
-      const product = await fetch("https://fakestoreapi.com/products");
-      const parsed = await product.json();
-      console.log(parsed);
+    setProduct(state, action) {
+      return action.payload;
     },
   },
 });
+export const { setProduct } = productSlice.actions;
+export default productSlice.reducer;
 
-export const { get_product } = productSlice.actions;
-export default get_product.reducer;
+//thunks
+
+export function fetchProducts() {
+  return async function fetchProductThunk(dispatch) {
+    try {
+      const res = await fetch("https://fakestoreapi.com/products");
+      const data = await res.json();
+      dispatch(setProduct(data));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+}

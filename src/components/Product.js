@@ -1,28 +1,22 @@
 import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchProducts } from "../store/slice/productSlice";
 import Card from "./Card";
 
 const Product = () => {
-  const [product, setProduct] = useState([]);
+  const dispatch = useDispatch();
+  const item = useSelector((state) => state.product);
   const [limit, setLimit] = useState(8);
   useEffect(() => {
-    const fetchProduct = async () => {
-      try {
-        const items = await fetch("https://fakestoreapi.com/products");
-        const parsed = await items.json();
-        setProduct(parsed);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchProduct();
+    dispatch(fetchProducts());
   }, []);
 
   const showWrapper = () => {
-    if (product.length) {
+    if (item.length) {
       return (
         <>
           <div className="product_wrapper">
-            {product.slice(0, limit).map((data) => {
+            {item.slice(0, limit).map((data) => {
               const { title, price, image, id, description } = data;
               return (
                 <Card
@@ -42,13 +36,13 @@ const Product = () => {
   };
   return (
     <>
-      {product.length < 1 && (
+      {item.length < 1 && (
         <div className="loading">
           <h5>loading ...</h5>
         </div>
       )}
       {showWrapper()}
-      {limit < product.length && (
+      {limit < item.length && (
         <div className="load_more_div">
           <span onClick={() => setLimit(limit + 4)}>Load More</span>
         </div>
