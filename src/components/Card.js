@@ -15,11 +15,13 @@ const Card = ({ data }) => {
     description,
   };
 
+  let in_cart = false;
   const handleAdd = (product) => {
     const data = item.find((item) => {
       return item.id === product.id;
     });
     if (data) {
+      in_cart = true;
       return alert("already in the cart");
     }
     // call the dispatch functionand call the action which auto invoke the action
@@ -37,7 +39,7 @@ const Card = ({ data }) => {
         }}
         className="btn"
       >
-        Add to cart
+        {in_cart ? "In the cart" : "Add to cart"}
       </button>
     </div>
   );
