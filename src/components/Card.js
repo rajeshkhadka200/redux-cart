@@ -2,7 +2,8 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { add } from "../store/slice/cartSlice"; //import the action from slice
 
-const Card = ({ image, price, title, id, description }) => {
+const Card = ({ data }) => {
+  const { id, image, price, title, description } = data;
   //use the dispatch the function
   const dispatch = useDispatch();
   const item = useSelector((cart) => cart.cart_);

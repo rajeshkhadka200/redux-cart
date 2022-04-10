@@ -17,17 +17,7 @@ const Product = () => {
         <>
           <div className="product_wrapper">
             {item.slice(0, limit).map((data) => {
-              const { title, price, image, id, description } = data;
-              return (
-                <Card
-                  key={id}
-                  title={title}
-                  price={price}
-                  image={image}
-                  id={id}
-                  description={description}
-                />
-              );
+              return <Card key={data.id} data={data} />;
             })}
           </div>
         </>

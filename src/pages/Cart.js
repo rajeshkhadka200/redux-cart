@@ -11,17 +11,7 @@ const Cart = () => {
     <>
       <div className="cart_wrapper">
         {cartItem.map((item) => {
-          const { title, description, id, image, price } = item;
-          return (
-            <CartCard
-              key={id}
-              title={title}
-              description={description}
-              id={id}
-              image={image}
-              price={price}
-            />
-          );
+          return <CartCard key={item.id} item={item} />;
         })}
       </div>
     </>

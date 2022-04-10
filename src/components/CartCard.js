@@ -1,7 +1,8 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { remove } from "../store/slice/cartSlice";
-const CartCard = ({ title, description, id, image, price }) => {
+const CartCard = ({ item }) => {
+  const { title, description, id, image, price } = item;
   const dispatch = useDispatch();
   const handleDelete = (id) => {
     dispatch(remove(id));
